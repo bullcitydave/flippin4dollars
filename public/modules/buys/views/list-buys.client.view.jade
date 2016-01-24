@@ -1,0 +1,23 @@
+html
+    body
+        section(data-ng-controller='BuysController', data-ng-init='find()')
+            .page-header
+                h1 Buys
+            .list-group
+                a.list-group-item(data-ng-repeat='buy in buys', data-ng-href='#!/buys/{{buy._id}}')
+                    small.list-group-item-text {{buy.created | date:'medium'}} / {{buy.user.displayName}}
+                    h4.list-group-item-heading {{buy.merchant}}
+                    p.list-group-item-text {{buy.item}}
+                    p.list-group-item-text
+                        strong Retail
+                        span  {{buy.retail | currency}}
+                    p.list-group-item-text
+                        strong Paid
+                        span  {{buy.paid | currency}}
+                    p.list-group-item-text
+                        strong Net Cost
+                        span  {{buy.netCost | currency}}
+            .alert.alert-warning.text-center(data-ng-hide='!buys.$resolved || buys.length')
+                | No buys yet, why don't you
+                a(href='/#!/buys/create') create one
+                | ?

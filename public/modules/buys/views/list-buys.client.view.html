@@ -1,16 +1,17 @@
-<section data-ng-controller="BuysController" data-ng-init="find()">
-    <div class="page-header">
+
+<html>
+  <body>
+    <section data-ng-controller="BuysController" data-ng-init="find()">
+      <div class="page-header">
         <h1>Buys</h1>
-    </div>
-    <div class="list-group">
-        <a data-ng-repeat="buy in buys" data-ng-href="#!/buys/{{buy._id}}" class="list-group-item">
-            <small class="list-group-item-text">{{buy.created | date:'medium'}} / {{buy.user.displayName}}</small>
-            <h4 class="list-group-item-heading">{{buy.site}}</h4>
-            <p class="list-group-item-text">{{buy.item}}</p>
-            <p class="list-group-item-text">{{buy.cost}}</p>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!buys.$resolved || buys.length">
-    	No buys yet, why don't you <a href="/#!/buys/create">create one</a>?
-    </div>
-</section>
+      </div>
+      <div class="list-group"><a data-ng-repeat="buy in buys" data-ng-href="#!/buys/{{buy._id}}" class="list-group-item"><small class="list-group-item-text">{{buy.created | date:'medium'}} / {{buy.user.displayName}}</small>
+          <h4 class="list-group-item-heading">{{buy.merchant}}</h4>
+          <p class="list-group-item-text">{{buy.item}}</p>
+          <p class="list-group-item-text"><strong>Retail</strong><span> {{buy.retail | currency}}</span></p>
+          <p class="list-group-item-text"><strong>Paid</strong><span> {{buy.paid | currency}}</span></p>
+          <p class="list-group-item-text"><strong>Net Cost</strong><span> {{buy.netCost | currency}}</span></p></a></div>
+      <div data-ng-hide="!buys.$resolved || buys.length" class="alert alert-warning text-center">No buys yet, why don't you<a href="/#!/buys/create">create one</a>?</div>
+    </section>
+  </body>
+</html>
