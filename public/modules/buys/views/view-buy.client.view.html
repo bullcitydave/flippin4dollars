@@ -1,20 +1,17 @@
-<section data-ng-controller="BuysController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1>{{buy.site}}</h1>
-	</div>
 
-	<div class="pull-right" data-ng-show="authentication.user._id == buy.user._id">
-		<a class="btn btn-primary" href="/#!/buys/{{buy._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">Posted on {{buy.created | date:'mediumDate'}} by {{buy.user.displayName}}</em>
-	</small>
-	<p class="lead">
-		{{buy.item}}
-	</p>
-</section>
+<html>
+  <body>
+    <section data-ng-controller="BuysController" data-ng-init="findOne()">
+      <div class="page-header">
+        <h1>{{buy.site}}</h1>
+      </div>
+      <div data-ng-show="authentication.user._id == buy.user._id" class="pull-right"><a href="/#!/buys/{{buy._id}}/edit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a><a data-ng-click="remove();" class="btn btn-primary"><i class="glyphicon glyphicon-trash"></i></a></div><small><em class="text-muted">Posted on {{buy.created | date:'mediumDate'}} by {{buy.user.displayName}}</em></small>
+      <p class="lead">{{buy.item}}</p>
+      <p><em>{{buy.merchant}}</em></p>
+      <p>{{buy.type}}</p>
+      <p><strong>Retail</strong><span> {{buy.retail | currency}}</span></p>
+      <p><strong>Paid</strong><span> {{buy.paid | currency}}</span></p>
+      <p><strong>Net Cost</strong><span> {{buy.netCost | currency}}</span></p>
+    </section>
+  </body>
+</html>

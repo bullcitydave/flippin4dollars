@@ -1,0 +1,28 @@
+html
+    body
+        section(data-ng-controller='BuysController', data-ng-init='findOne()')
+            .page-header
+                h1 {{buy.site}}
+            .pull-right(data-ng-show='authentication.user._id == buy.user._id')
+                a.btn.btn-primary(href='/#!/buys/{{buy._id}}/edit')
+                    i.glyphicon.glyphicon-edit
+                a.btn.btn-primary(data-ng-click='remove();')
+                    i.glyphicon.glyphicon-trash
+            small
+                em.text-muted Posted on {{buy.created | date:'mediumDate'}} by {{buy.user.displayName}}
+            p.lead
+                | {{buy.item}}
+            p
+                em {{buy.merchant}}
+            p {{buy.type}}
+            p
+                strong Retail
+                span  {{buy.retail | currency}}
+            p
+                strong Paid
+                span  {{buy.paid | currency}}
+            p
+                strong Net Cost
+                span  {{buy.netCost | currency}}
+
+

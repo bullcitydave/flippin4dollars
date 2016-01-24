@@ -30,10 +30,14 @@ data-ng-model='retail', placeholder='What\'s the retail price?')
                                 input#netCost.form-control.currency(type='number',
 data-ng-model='paid', placeholder='What did I pay (before discounts, tax, shipping)?')
                         .form-group
-                            label.control-label(for='cost') Net Cost
+                            label.control-label(for='discount') Discount
                             .controls
-                                input#netCost.form-control.currency(type='number',
-data-ng-model='netCost', placeholder='Net Cost')
+                                input#discount.form-control(type='number', ng-change="updateNet()",
+                                data-ng-model='discount', placeholder='Percentage discount')
+                        .form-group
+                            label.control-label(for='netCost') Net Cost
+                            .controls
+                                input#netCost.form-control.currency(type='number',data-ng-model='netCost', placeholder='Net Cost')
                         .form-group
                             input.btn.btn-default(type='submit')
                         .text-danger(data-ng-show='error')

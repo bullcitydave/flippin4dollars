@@ -69,5 +69,9 @@ angular.module('buys').controller('BuysController', ['$scope', '$stateParams', '
 				buyId: $stateParams.buyId
 			});
 		};
+
+		$scope.updateNet = function() {
+			$scope.netCost = $scope.paid - $scope.discount;
+		}
 	}
 ]);
