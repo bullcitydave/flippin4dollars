@@ -11,6 +11,10 @@ var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var mocha = require('gulp-mocha');
 var karma = require('gulp-karma');
+var jade = require('gulp-jade');
+var notify = require('gulp-notify');
+var glob = require('glob');
+
 
 var applicationJavaScriptFiles, 
     applicationCSSFiles,
@@ -26,6 +30,18 @@ gulp.task('csslint', function() {
   gulp.src(['public/modules/**/css/*.css'])
     .pipe(csslint('.csslintrc'))
     .pipe(csslint.reporter());
+});
+
+/**
+ * compile Jade to Html
+ */
+gulp.task('jade',  function() {  // ['markdown'] forces jade to wait
+    return gulp.src('./public/**/*.jade')
+        .pipe(jade({
+            pretty: true,  // uncompressed
+        }))
+        .pipe(gulp.dest('./public'))
+        .pipe(notify({ message: 'Jade to HTML task complete' }));
 });
 
 gulp.task('nodemon', function (done) {
@@ -88,7 +104,7 @@ gulp.task('watch', function() {
 });
 
 // Default task(s).
-gulp.task('default', ['jshint', 'csslint','nodemon', 'watch']);
+gulp.task('default', ['jshint', 'csslint','nodemon', 'jade', 'watch']);
 
 // Lint task(s).
 gulp.task('lint', ['jshint', 'csslint']);

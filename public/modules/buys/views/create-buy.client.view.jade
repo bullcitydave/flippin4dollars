@@ -1,0 +1,42 @@
+html
+    body
+        section(data-ng-controller='BuysController')
+            .page-header
+                h1 New Buy
+            .col-md-12
+                form.form-horizontal(data-ng-submit='create()', novalidate='')
+                    fieldset
+                        .form-group
+                            label.control-label(for='Merchant') Merchant
+                            .controls
+                                input#vendor.form-control(type='text', data-ng-model='merchant',
+                                placeholder='Where did I buy this?', required='')
+                        .form-group
+                            label.control-label(for='item') Item Description
+                            .controls
+                                input#item.form-control(data-ng-model='item', placeholder='Item')
+                        .form-group
+                            label.control-label(for='type') Type
+                            .controls
+                                input#type.form-control(data-ng-model='type', placeholder='Type')
+                        .form-group
+                            label.control-label(for='retail') Retail
+                            .controls
+                                input#netCost.form-control.currency(type='number',
+data-ng-model='retail', placeholder='What\'s the retail price?')
+                        .form-group
+                            label.control-label(for='paid') Paid
+                            .controls
+                                input#netCost.form-control.currency(type='number',
+data-ng-model='paid', placeholder='What did I pay (before discounts, tax, shipping)?')
+                        .form-group
+                            label.control-label(for='cost') Net Cost
+                            .controls
+                                input#netCost.form-control.currency(type='number',
+data-ng-model='netCost', placeholder='Net Cost')
+                        .form-group
+                            input.btn.btn-default(type='submit')
+                        .text-danger(data-ng-show='error')
+                            strong {{error}}
+
+
