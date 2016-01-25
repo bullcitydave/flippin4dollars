@@ -5,8 +5,8 @@
       <div class="page-header">
         <h1>New Buy</h1>
       </div>
-      <div class="col-md-12">
-        <form data-ng-submit="create()" novalidate="" class="form-horizontal">
+      <form data-ng-submit="create()" novalidate="" class="form-horizontal">
+        <div class="col-md-6">
           <fieldset>
             <div class="form-group">
               <label for="Merchant" class="control-label">Merchant</label>
@@ -55,8 +55,45 @@
             </div>
             <div data-ng-show="error" class="text-danger"><strong>{{error}}</strong></div>
           </fieldset>
-        </form>
-      </div>
+        </div>
+        <div class="col-md-6">
+          <fieldset>
+            <div class="form-group">
+              <label for="potentialSale" class="control-label">Potential Sale</label>
+              <div class="controls">
+                <input id="potentialSale" type="number" data-ng-model="potentialSale" placeholder="How much do you hope to get?" class="form-control currency"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="potentialPaypalFee" class="control-label">Potential Paypal Fee</label>
+              <div class="controls">
+                <input id="potentialPaypalFee" type="number" data-ng-model="potentialPaypalFee" placeholder="Default to 2.9% + $0.30" class="form-control currency"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="potentialListingFee" class="control-label">Potential Listing Fee</label>
+              <div class="controls">
+                <input id="potentialListingFee" type="number" data-ng-model="potentialListingFee" placeholder="Listing Fee" class="form-control currency"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="potentialFVF" class="control-label">Potential Final-Value Fee</label>
+              <div class="controls">
+                <input id="potentialFinalValueFee" type="number" data-ng-model="potentialFVF" placeholder="For store owners, 9% of listing price plus shipping charged" class="form-control currency"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="netSale" class="control-label">Net Sale</label>
+              <div class="controls">
+                <input id="netSale" type="number" data-ng-model="netSale" placeholder="Net proceeds from sale" class="form-control currency"/>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-md-12 text-center">
+          <h2 data-ng-model="potentialProfit"></h2>
+        </div>
+      </form>
     </section>
   </body>
 </html>

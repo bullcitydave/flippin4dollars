@@ -3,8 +3,8 @@ html
         section(data-ng-controller='BuysController')
             .page-header
                 h1 New Buy
-            .col-md-12
-                form.form-horizontal(data-ng-submit='create()', novalidate='')
+            form.form-horizontal(data-ng-submit='create()', novalidate='')
+                .col-md-6
                     fieldset
                         .form-group
                             label.control-label(for='Merchant') Merchant
@@ -42,5 +42,36 @@ data-ng-model='paid', placeholder='What did I pay (before discounts, tax, shippi
                             input.btn.btn-default(type='submit')
                         .text-danger(data-ng-show='error')
                             strong {{error}}
-
+                .col-md-6
+                    fieldset
+                        .form-group
+                            label.control-label(for='potentialSale') Potential Sale
+                            .controls
+                                input#potentialSale.form-control.currency(type='number',
+                                data-ng-model='potentialSale', placeholder='How much do you hope ' +
+                                'to get?')
+                        .form-group
+                            label.control-label(for='potentialPaypalFee') Potential Paypal Fee
+                            .controls
+                                input#potentialPaypalFee.form-control.currency(type='number',
+                                data-ng-model='potentialPaypalFee', placeholder='Default to 2.9% ' +
+                                '+ $0.30')
+                        .form-group
+                            label.control-label(for='potentialListingFee') Potential Listing Fee
+                            .controls
+                                input#potentialListingFee.form-control.currency(type='number',
+                                data-ng-model='potentialListingFee', placeholder='Listing Fee')
+                        .form-group
+                            label.control-label(for='potentialFVF') Potential Final-Value Fee
+                            .controls
+                                input#potentialFinalValueFee.form-control.currency(type='number',
+                                data-ng-model='potentialFVF', placeholder='For store owners, 9% ' +
+                                'of listing price plus shipping charged')
+                        .form-group
+                            label.control-label(for='netSale') Net Sale
+                            .controls
+                                input#netSale.form-control.currency(type='number',
+                                data-ng-model='netSale', placeholder='Net proceeds from sale')
+                .col-md-12.text-center
+                    h2(data-ng-model="potentialProfit")
 
