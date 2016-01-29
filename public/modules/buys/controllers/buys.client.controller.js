@@ -79,5 +79,34 @@ angular.module('buys').controller('BuysController', ['$scope', '$stateParams', '
 					$scope.netCost = $scope.paid - $scope.discount;
 			}
 		};
+
+		$scope.calculateFeesAndProfit = function() {
+			$scope.ebay.potentialPaypalFee = $scope.calculatePayPalFee();
+			$scope.ebay.potentialFVF = $scope.calculateFVFee();
+			$scope.ebay.netSale = $scope.calculateNetSale();
+			$scope.potentialProfit = $scope.calculateProfit();
+		}
+
+		$scope.calculatePayPalFee = function() {
+			var payPalFee =  ($scope.ebay.potentialSale * .029) + .3;
+			return payPalFee;
+		}
+
+		$scope.calculateFVFee = function() {
+			var fvFee =  (($scope.ebay.potentialSale + ($scope.ebay.potentialShippingBuyer || 0)) * .09);
+			return fvFee;
+		}
+
+		$scope.calculateNetSale = function() {
+			var incoming = $scope.ebay.potentialSale + ($scope.ebay.potentialShippingBuyer || 0);
+			var outgoing = ($scope.ebay.potentialShippingSeller || 0) + ($scope.ebay.potentialListingFee || 0 + $scope.ebay.potentialFVF + $scope.ebay.potentialPaypalFee);
+			var netSale = incoming - outgoing;
+			return netSale;
+		}
+
+		$scope.calculateProfit = function() {
+			var profit = $scope.ebay.netSale - $scope.netCost;
+			return profit;
+		}
 	}
 ]);

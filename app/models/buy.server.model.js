@@ -57,6 +57,12 @@ var BuySchema = new Schema({
 		potentialSale : {
 			type : Number
 		},
+		potentialShippingBuyer : {
+			type : Number
+		},
+		potentialShippingSeller : {
+			type : Number
+		},
 		potentialPaypalFee : {
 			type: Number
 		},
@@ -67,6 +73,9 @@ var BuySchema = new Schema({
 			type: Number
 		},
 		netSale : {
+			type: Number
+		},
+		buyerShippingCharge : {
 			type: Number
 		}
 	},

@@ -6,6 +6,9 @@
         <h1>New Buy Scenario</h1>
       </div>
       <form data-ng-submit="create()" novalidate="" class="form-horizontal">
+        <div class="col-md-12">
+          <h2>Potential Profit : {{potentialProfit || 0.00 | currency}}</h2>
+        </div>
         <div class="col-md-5">
           <fieldset>
             <div class="form-group">
@@ -71,31 +74,43 @@
             <div class="form-group">
               <label for="potentialSale" class="control-label">Potential Sale</label>
               <div class="controls">
-                <input id="potentialSale" type="number" data-ng-model="potentialSale" placeholder="How much do you hope to get?" class="form-control currency"/>
+                <input id="potentialSale" type="number" ng-change="calculateFeesAndProfit()" ng-model-options="{ debounce: 500 }" data-ng-model="ebay.potentialSale" placeholder="How much do you hope to get?" class="form-control currency"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="potentialShippingBuyer" class="control-label">Potential Shipping</label>Charge to Buyer
+              <div class="controls">
+                <input id="potentialShippingBuyer" type="number" ng-change="calculateFeesAndProfit()" data-ng-model="ebay.potentialShippingBuyer" placeholder="How much do you plan to charge the buyer for shipping?" class="form-control currency"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="potentialShippingSeller" class="control-label">Potential Shipping</label>Costs for You as the Seller
+              <div class="controls">
+                <input id="potentialShippingSeller" type="number" ng-change="calculateFeesAndProfit()" data-ng-model="ebay.potentialShippingSeller" placeholder="How much do you think you will pay yourself for shipping and handling?" class="form-control currency"/>
               </div>
             </div>
             <div class="form-group">
               <label for="potentialPaypalFee" class="control-label">Potential Paypal Fee</label>
               <div class="controls">
-                <input id="potentialPaypalFee" type="number" data-ng-model="potentialPaypalFee" placeholder="Default to 2.9% + $0.30" class="form-control currency"/>
+                <input id="potentialPaypalFee" type="number" data-ng-model="ebay.potentialPaypalFee" placeholder="Default to 2.9% + $0.30" class="form-control currency"/>
               </div>
             </div>
             <div class="form-group">
               <label for="potentialListingFee" class="control-label">Potential Listing Fee</label>
               <div class="controls">
-                <input id="potentialListingFee" type="number" data-ng-model="potentialListingFee" placeholder="Listing Fee" class="form-control currency"/>
+                <input id="potentialListingFee" type="number" data-ng-model="ebay.potentialListingFee" ng-change="calculateFeesAndProfit()" placeholder="Listing Fee" class="form-control currency"/>
               </div>
             </div>
             <div class="form-group">
               <label for="potentialFVF" class="control-label">Potential Final-Value Fee</label>
               <div class="controls">
-                <input id="potentialFinalValueFee" type="number" data-ng-model="potentialFVF" placeholder="For store owners, 9% of listing price plus shipping charged" class="form-control currency"/>
+                <input id="potentialFVF" type="number" data-ng-model="ebay.potentialFVF" placeholder="For store owners, 9% of listing price plus shipping charged" class="form-control currency"/>
               </div>
             </div>
             <div class="form-group">
               <label for="netSale" class="control-label">Net Sale</label>
               <div class="controls">
-                <input id="netSale" type="number" data-ng-model="netSale" placeholder="Net proceeds from sale" class="form-control currency"/>
+                <input id="netSale" type="number" data-ng-model="ebay.netSale" placeholder="Net proceeds from sale" class="form-control currency"/>
               </div>
             </div>
           </fieldset>
