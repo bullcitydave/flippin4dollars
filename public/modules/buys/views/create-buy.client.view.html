@@ -3,10 +3,10 @@
   <body>
     <section data-ng-controller="BuysController">
       <div class="page-header">
-        <h1>New Buy</h1>
+        <h1>New Buy Scenario</h1>
       </div>
       <form data-ng-submit="create()" novalidate="" class="form-horizontal">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <fieldset>
             <div class="form-group">
               <label for="Merchant" class="control-label">Merchant</label>
@@ -35,14 +35,24 @@
             <div class="form-group">
               <label for="paid" class="control-label">Paid</label>
               <div class="controls">
-                <input id="netCost" type="number" data-ng-model="paid" placeholder="What did I pay (before discounts, tax, shipping)?" class="form-control currency"/>
+                <input id="netCost" type="number" ng-change="updateNet(discountType)" data-ng-model="paid" placeholder="What did I pay (before discounts, tax, shipping)?" class="form-control currency"/>
               </div>
             </div>
             <div class="form-group">
               <label for="discount" class="control-label">Discount</label>
               <div class="controls">
-                <input id="discount" type="number" ng-change="updateNet()" data-ng-model="discount" placeholder="Percentage discount" class="form-control"/>
+                <input id="discount" type="number" ng-change="updateNet('percent')" data-ng-model="discount" placeholder="{{discountType | capitalize}} discount" class="form-control"/>
               </div>
+            </div>
+            <div ng-init="discountType='percent'" class="form-group">
+              <label for="discountType" class="control-label">Type
+                <label>
+                  <input id="discounttype" type="radio" ng-change="updateNet(discountType)" name="discountType" value="percent" ng-model="discountType" checked="checked"/><span>%</span>
+                </label>
+                <label>
+                  <input id="discounttype" type="radio" ng-change="updateNet(discountType)" name="discountType" value="nominal" ng-model="discountType"/><span>$</span>
+                </label>
+              </label>
             </div>
             <div class="form-group">
               <label for="netCost" class="control-label">Net Cost</label>
@@ -56,7 +66,7 @@
             <div data-ng-show="error" class="text-danger"><strong>{{error}}</strong></div>
           </fieldset>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5 col-md-offset-2">
           <fieldset>
             <div class="form-group">
               <label for="potentialSale" class="control-label">Potential Sale</label>

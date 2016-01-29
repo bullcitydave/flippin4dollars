@@ -70,8 +70,14 @@ angular.module('buys').controller('BuysController', ['$scope', '$stateParams', '
 			});
 		};
 
-		$scope.updateNet = function() {
-			$scope.netCost = $scope.paid - $scope.discount;
-		}
+		$scope.updateNet = function(discountType) {
+			switch(discountType) {
+				case 'percent':
+					$scope.netCost = $scope.paid * (1 - ($scope.discount / 100));
+					break;
+				case 'nominal':
+					$scope.netCost = $scope.paid - $scope.discount;
+			}
+		};
 	}
 ]);

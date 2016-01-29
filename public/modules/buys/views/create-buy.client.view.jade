@@ -2,9 +2,9 @@ html
     body
         section(data-ng-controller='BuysController')
             .page-header
-                h1 New Buy
+                h1 New Buy Scenario
             form.form-horizontal(data-ng-submit='create()', novalidate='')
-                .col-md-6
+                .col-md-5
                     fieldset
                         .form-group
                             label.control-label(for='Merchant') Merchant
@@ -28,12 +28,29 @@ data-ng-model='retail', placeholder='What\'s the retail price?')
                             label.control-label(for='paid') Paid
                             .controls
                                 input#netCost.form-control.currency(type='number',
+                                ng-change="updateNet(discountType)",
 data-ng-model='paid', placeholder='What did I pay (before discounts, tax, shipping)?')
                         .form-group
                             label.control-label(for='discount') Discount
                             .controls
-                                input#discount.form-control(type='number', ng-change="updateNet()",
-                                data-ng-model='discount', placeholder='Percentage discount')
+                                input#discount.form-control(type='number', ng-change="updateNet" +
+                                "('percent')",
+                                data-ng-model='discount', placeholder='{{discountType | ' +
+                                'capitalize}}' +
+                                        ' discount')
+                        .form-group(ng-init="discountType='percent'")
+                            label.control-label(for='discountType') Type
+                                label
+                                    input#discounttype(type='radio', ng-change="updateNet" +
+                                    "(discountType)",
+                                    name='discountType',
+                                    value='percent', ng-model="discountType" checked)
+                                    span %
+                                label
+                                    input#discounttype(type='radio', ng-change="updateNet" +
+                                    "(discountType)",name='discountType',
+                                    value='nominal', ng-model="discountType")
+                                    span $
                         .form-group
                             label.control-label(for='netCost') Net Cost
                             .controls
@@ -42,7 +59,7 @@ data-ng-model='paid', placeholder='What did I pay (before discounts, tax, shippi
                             input.btn.btn-default(type='submit')
                         .text-danger(data-ng-show='error')
                             strong {{error}}
-                .col-md-6
+                .col-md-5.col-md-offset-2
                     fieldset
                         .form-group
                             label.control-label(for='potentialSale') Potential Sale
